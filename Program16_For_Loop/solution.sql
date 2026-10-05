@@ -1,7 +1,16 @@
 USE CollegeDB;
+DELIMITER //
+
+CREATE PROCEDURE DisplayNumbers()
 BEGIN
-    FOR i IN 1..10 LOOP
-        DBMS_OUTPUT.PUT_LINE(i);
-    END LOOP;
-END;
-/
+    DECLARE i INT DEFAULT 1;
+
+    WHILE i <= 10 DO
+        SELECT i;
+        SET i = i + 1;
+    END WHILE;
+END //
+
+DELIMITER ;
+
+CALL DisplayNumbers();
