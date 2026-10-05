@@ -1,11 +1,6 @@
 USE CollegeDB;
 -- Declare two variables
-DECLARE
-    a NUMBER := 10;
-    b NUMBER := 20;
-    sum NUMBER;
-BEGIN
-    sum := a + b;
-    DBMS_OUTPUT.PUT_LINE('Sum = ' || sum);
-END;
-/
+SET @a = 10;
+SET @b = 20;
+
+SELECT @a + @b AS Sum;
