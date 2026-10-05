@@ -1,26 +1,33 @@
 USE CollegeDB;
+CREATE TABLE Student (
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR(50),
+    DepartmentID INT
+);
 
-DROP FUNCTION IF EXISTS CountStudentsByDepartment;
+INSERT INTO Student VALUES
+(101, 'Arun', 1),
+(102, 'Bala', 1),
+(103, 'Kavi', 2),
+(104, 'Riya', 1);
 
-DELIMITER $$
 
-CREATE FUNCTION CountStudentsByDepartment(
-    p_department_id INT
-)
+DELIMITER //
+
+CREATE FUNCTION CountStudents(dept INT)
 RETURNS INT
 DETERMINISTIC
-READS SQL DATA
 BEGIN
+    DECLARE total INT;
 
-    DECLARE student_count INT;
+    SELECT COUNT(*) INTO total
+    FROM Student
+    WHERE DepartmentID = dept;
 
-    -- Count students belonging to the given department
-
-    -- Return the count
-
-END $$
+    RETURN total;
+END //
 
 DELIMITER ;
 
--- Test
-SELECT CountStudentsByDepartment(1) AS StudentCount;
+SELECT CountStudents(1) AS TotalStudents;
+
