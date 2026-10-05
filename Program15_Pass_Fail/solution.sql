@@ -1,11 +1,17 @@
 USE CollegeDB;
-DECLARE
-    marks NUMBER := 65;
+DELIMITER //
+
+CREATE PROCEDURE CheckMarks()
 BEGIN
+    DECLARE marks INT DEFAULT 60;
+
     IF marks >= 40 THEN
-        DBMS_OUTPUT.PUT_LINE('Student has Passed');
+        SELECT 'Pass' AS Result;
     ELSE
-        DBMS_OUTPUT.PUT_LINE('Student has Failed');
+        SELECT 'Fail' AS Result;
     END IF;
-END;
-/
+END //
+
+DELIMITER ;
+
+CALL CheckMarks();
