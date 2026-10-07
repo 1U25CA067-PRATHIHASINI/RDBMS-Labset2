@@ -1,39 +1,33 @@
 USE CollegeDB;
---create table Employee
-CREATE TABLE Employee (
-    EmployeeID INT PRIMARY KEY,
-    EmployeeName VARCHAR(50)
+
+-- Create a table Employee_Log.
+
+CREATE TABLE Employee_Log (
+    Message VARCHAR(255),
+    CreatedAt TIMESTAMP DEFAULT
+    CURRENT_TIMESTAMP
 );
 
---insert values
-
-INSERT INTO Employee VALUES
-(1, 'Arun'),
-(2, 'Bala'),
-(3, 'Kavi'),
-(4, 'Riya');
-
--- create table Employeelog
-
-CREATE TABLE EmployeeLog (
-    Message VARCHAR(100)
-);
-
---
+-- Trigger
 
 DELIMITER //
 
-CREATE TRIGGER EmployeeTrigger
+CREATE TRIGGER AfterEmployeeInsert
 AFTER INSERT ON Employee
 FOR EACH ROW
 BEGIN
-    INSERT INTO EmployeeLog
-    VALUES ('New employee record inserted successfully');
+    INSERT INTO Employee_Log (Message)
+    VALUES (
+        CONCAT('New employee inserted: ',
+        NEW.EmployeeName)
+    );
 END //
-    
---
-    INSERT INTO Employee VALUES (5, 'Prathi');
-
-SELECT * FROM EmployeeLog;
 
 DELIMITER ;
+
+- Display 
+
+INSERT INTO Employee(EmployeeID, EmployeeName)
+VALUES (1, 'Ravi');
+
+SELECT * FROM Employee_Log;
