@@ -1,6 +1,6 @@
 USE CollegeDB;
 
--- Using FOR LOOP
+-- Insert student procedure 
 
 DELIMITER //
 
