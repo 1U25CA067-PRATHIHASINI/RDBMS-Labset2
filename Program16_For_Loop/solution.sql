@@ -1,4 +1,7 @@
 USE CollegeDB;
+
+-- Display numbers 1-10.
+
 DELIMITER //
 
 CREATE PROCEDURE DisplayNumbers()
@@ -6,7 +9,7 @@ BEGIN
     DECLARE i INT DEFAULT 1;
 
     WHILE i <= 10 DO
-        SELECT i;
+        SELECT i AS Number;
         SET i = i + 1;
     END WHILE;
 END //
