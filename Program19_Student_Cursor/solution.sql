@@ -1,47 +1,38 @@
 USE CollegeDB;
 
-CREATE TABLE Student (
-    StudentID INT PRIMARY KEY,
-    StudentName VARCHAR(50),
-    DepartmentID INT
-);
+-- Cursor
 
-INSERT INTO Student VALUES
-(101, 'Arun', 1),
-(102, 'Bala', 2),
-(103, 'Kavi', 1),
-(104, 'Riya', 2);
-
---cursor
 DELIMITER //
 
 CREATE PROCEDURE DisplayStudents()
 BEGIN
     DECLARE done INT DEFAULT 0;
-    DECLARE id INT;
-    DECLARE name VARCHAR(50);
-    DECLARE dept INT;
+    DECLARE sid INT;
+    DECLARE sname VARCHAR(100);
+    DECLARE did INT;
 
-    DECLARE c CURSOR FOR
-        SELECT StudentID, StudentName, DepartmentID
-        FROM Student;
+    DECLARE student_cursor CURSOR FOR
+    SELECT StudentID, StudentName, DepartmentID
+    FROM Student;
 
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET
+    done = 1;
 
-    OPEN c;
+    OPEN student_cursor;
 
     read_loop: LOOP
-        FETCH c INTO id, name, dept;
+        FETCH student_cursor INTO sid, sname, did;
 
         IF done = 1 THEN
             LEAVE read_loop;
         END IF;
 
-        SELECT id AS StudentID, name AS StudentName,
-               dept AS DepartmentID;
+        SELECT sid AS StudentID,
+            sname AS StudentName,
+            did AS DepartmentID;
     END LOOP;
 
-    CLOSE c;
+    CLOSE student_cursor;
 END //
 
 DELIMITER ;
