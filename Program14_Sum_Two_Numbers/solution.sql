@@ -1,6 +1,19 @@
 USE CollegeDB;
 -- Declare two variables
-SET @a = 10;
-SET @b = 20;
 
-SELECT @a + @b AS Sum;
+DELIMITER //
+
+CREATE PROCEDURE SumTwoNumbers()
+BEGIN
+    DECLARE num1 INT DEFAULT 10;
+    DECLARE num2 INT DEFAULT 20;
+    DECLARE total INT;
+
+    SET total = num1 + num2;
+
+    SELECT total AS Sum;
+END //
+
+DELIMITER ;
+
+CALL SumTwoNumbers();
