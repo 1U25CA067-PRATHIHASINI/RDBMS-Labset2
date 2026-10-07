@@ -1,10 +1,11 @@
 USE CollegeDB;
+
+--check Greater than 40.
+
 DELIMITER //
 
-CREATE PROCEDURE CheckMarks()
+CREATE PROCEDURE CheckResult(IN marks INT)
 BEGIN
-    DECLARE marks INT DEFAULT 60;
-
     IF marks >= 40 THEN
         SELECT 'Pass' AS Result;
     ELSE
@@ -14,4 +15,4 @@ END //
 
 DELIMITER ;
 
-CALL CheckMarks();
+CALL CheckResult(65);
